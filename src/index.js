@@ -1,23 +1,16 @@
 const express = require('express')
-const handlebars = require("express-handlebars")
-const path = require ('path')
+
+const expressConfugurator = require('./config/expressConfiguration')
+const handlebarsConfigurator = require('./config/handlebarsConfiguration')
 
 const app = express()
-
 const PORT = 5000
 
-
-app.use(express.static(path.resolve(__dirname,'public')))
-app.engine('hbs', handlebars.engine ({
-    extname: "hbs"
-}))
-app.set('view engine','hbs')
-app.set('views', 'src/views')
+expressConfugurator(app)
+handlebarsConfigurator(app)
 
 app.get('/',(req,res)=>{
-
 res.render('index')
-
 })
 
 app.listen(PORT ,()=> console.log(`server is listening on port ${PORT}...`))
