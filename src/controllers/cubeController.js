@@ -1,12 +1,13 @@
 const router = require('express').Router()
-
-router.get('/create',(req,res) => {
+const cubeManager = require('../menagers/cubeManager')
+router.get('/create', (req, res) => {
+    console.log(cubeManager.getAll())
     res.render('create')
 })
 
-router.post('/create',(req,res) => {
-    console.log(req.body)
-
+router.post('/create', (req, res) => {
+    const { name, description, imageUrl, diffultyLevel } = req.body
+    cubeManager.create({ name, description, imageUrl, diffultyLevel: Number(diffultyLevel) })
     res.redirect('/')
 })
 
