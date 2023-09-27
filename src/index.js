@@ -3,19 +3,14 @@ const express = require('express')
 
 const expressConfugurator = require('./config/expressConfiguration')
 const handlebarsConfigurator = require('./config/handlebarsConfiguration')
-const homeController = require('./controllers/homeController')
-const cubeController = require('./controllers/cubeController')
+const routes = require('./routes')
 
 const app = express()
 const PORT = 5000
 
 expressConfugurator(app)
 handlebarsConfigurator(app)
+app.use(routes)
 
-app.use(homeController)
-app.use('/cubes', cubeController)
-app.get('*',(req,res) => {
-    res.redirect('/404')
-})
 
 app.listen(PORT, () => console.log(`server is listening on port ${PORT}...`))
