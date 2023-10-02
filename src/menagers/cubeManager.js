@@ -1,8 +1,8 @@
 const Cube = require('../models/Cube.js')
 
 
-exports.getAll =async (search, from, to) => {
-    let result =  await Cube.find().lean()
+exports.getAll = async (search, from, to) => {
+    let result = await Cube.find().lean()
 
     // todo use monfoose to filter in db
     if (search) {
@@ -16,7 +16,7 @@ exports.getAll =async (search, from, to) => {
     }
     return result
 }
-exports.getOne = (cubeId) =>Cube.findById(cubeId)
+exports.getOne = (cubeId) => Cube.findById(cubeId)
 
 exports.create = async (cubeData) => {
 
