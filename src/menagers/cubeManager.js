@@ -1,9 +1,10 @@
-const uniqid = require('uniqid')
-const cubes = []
+const Cube = require('../models/Cube.js')
 
-exports.getAll = (search, from, to) => {
-    let result = cubes.slice()
 
+exports.getAll =async (search, from, to) => {
+    let result =  await Cube.find().lean()
+
+    // todo use monfoose to filter in db
     if (search) {
         result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()))
     }
@@ -15,14 +16,12 @@ exports.getAll = (search, from, to) => {
     }
     return result
 }
-exports.getOne = (cubeId) => cubes.find(x => x.id == cubeId)
+exports.getOne = (cubeId) =>Cube.findById(cubeId)
 
-exports.create = (cubeData) => {
+exports.create = async (cubeData) => {
 
-    const newCube = {
-        id: uniqid(),
-        ...cubeData,
-    }
-    cubes.push(newCube)
-    return newCube
+    const cube = new Cube(cubeData)
+    await cube.save()
+
+    return cube
 }
