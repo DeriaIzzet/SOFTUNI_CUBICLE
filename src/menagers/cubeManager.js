@@ -16,7 +16,9 @@ exports.getAll = async (search, from, to) => {
     }
     return result
 }
+
 exports.getOne = (cubeId) => Cube.findById(cubeId)
+exports.getOneWithAccessories = (cubeId) => this.getOne(cubeId).populate('accessories')
  
 exports.create = (cubeData) => {
     const cube = new Cube(cubeData)
@@ -24,8 +26,6 @@ exports.create = (cubeData) => {
 }
 
 exports.attachAccessory = async (cubeId,accessoryId) => {
-   // return Cube.findByIdAndUpdate(cubeId, {$push:{accessories : accessoryId}})
-
   const cube = await Cube.findById(cubeId)
   cube.accessories.push(accessoryId)
   return cube.save()
