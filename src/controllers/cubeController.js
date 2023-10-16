@@ -1,10 +1,10 @@
 const router = require('express').Router()
+
 const cubeManager = require('../menagers/cubeManager')
 const accessoryManager = require('../menagers/accessoryManager')
 const { getDifficultyOptionsViewData } = require('../utils/viewHelpers')
 
 router.get('/create', (req, res) => {
-    console.log(req.user)
     res.render('cube/create')
 })
 
